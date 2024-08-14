@@ -66,6 +66,19 @@ leaf:
           id: 4
           mgmt_ip: 192.168.0.15/24
           uplink_switch_interfaces: [ Ethernet5, Ethernet5 ]
+# Notice how we did not specify a filter or tags under RACK3. If the filter parameter is not defined, all VLANs/SVIs/VRFs will be provisioned on the switch. 
+# In our case, this means that VLANs 10 and 20 will both be created on our new Leaf switches. However, since they are leaf node types, no SVIs will be created.
+# Interfaces Ethernet9 and Ethernet10 do not exist on the Spines. Because of this, we will not run a deploy command since it would fail.
+#     - group: RACK3
+#       nodes:
+#         - name: s1-leaf5
+#           id: 5
+#           mgmt_ip: 192.168.0.28/24
+#           uplink_switch_interfaces: [ Ethernet9, Ethernet9 ]
+#         - name: s1-leaf6
+#           id: 6
+#           mgmt_ip: 192.168.0.29/24
+#           uplink_switch_interfaces: [ Ethernet10, Ethernet10 ]
 
 ##################################################################
 # Underlay Routing Protocol - ran on Spines
